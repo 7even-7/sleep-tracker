@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>logovernightsleep</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-button (click) = "backToHome()">Back</ion-button>
+  </ion-item>
+
+  
+    
+    
+ 
+  <ion-label>
+    Enter your sleep start time
+  </ion-label>
+  <ion-item>
+
+    
+    <ion-datetime [(ngModel)] = "date" presentation="date-time" [preferWheel]="true" size = "cover"></ion-datetime>
+  </ion-item>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+  
+  <ion-label>
+      Enter your sleep end time
+    </ion-label>
+  <ion-item>
+    
+    <ion-datetime [(ngModel)] = "enddate" presentation="date-time" [preferWheel]="true"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-button (click) = "submit()">Submit</ion-button>
+  </ion-item>
+</ion-content>
