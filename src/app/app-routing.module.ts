@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { Storage } from '@ionic/storage';
-
+import { IonicModule } from '@ionic/angular';
+import { Storage} from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 
 const routes: Routes = [
@@ -30,8 +31,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  imports: [IonicModule.forRoot(), IonicStorageModule.forRoot(),
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    
   ],
   exports: [RouterModule]
 })

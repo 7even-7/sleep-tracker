@@ -14,12 +14,12 @@
     <ion-input [(ngModel)] = "setScale" type = "number"  placeholder="Scale of  1 - 7"></ion-input>
   </ion-item>
   <hr>
+
   <ion-item>
-
-    <ion-label>Select the date</ion-label>
-    <ion-datetime [(ngModel)] = "date" presentation="date-time" [preferWheel]="true" size = "cover"></ion-datetime>
+    <ion-label slot="start">Select Date</ion-label>
+    <ion-input [(ngModel)] = "date" type="datetime-local" presentation="month-year-time"></ion-input>
   </ion-item>
-
+  
   <ion-item>
     <ion-button (click) = "submit()">Submit</ion-button>
   </ion-item>

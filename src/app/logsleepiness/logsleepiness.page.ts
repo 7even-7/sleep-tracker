@@ -5,7 +5,7 @@ import { SleepData } from '../data/sleep-data';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 import { HomePage } from '../home/home.page';
-
+import { Storage } from '@ionic/storage-angular';
 @Component({
   selector: 'app-logsleepiness',
   templateUrl: './logsleepiness.page.html',
@@ -14,6 +14,7 @@ import { HomePage } from '../home/home.page';
 export class LogsleepinessPage implements OnInit {
   private scaleNum: any;
   private dateval: any;
+  private sleepdate: number = 0;
   set setScale(value: any){
     console.log({value});
     this.scaleNum = value;
@@ -31,16 +32,23 @@ export class LogsleepinessPage implements OnInit {
   get date(): any{
     return this.dateval;
   }
-  constructor(public router: Router) { }
+  constructor(public router: Router, private localStorage: Storage) { }
 
   ngOnInit() {
   }
+  
   backToHome(){
     this.router
     .navigate(['home']);
   }
-  
-  submit(){
 
+  async submit(){
+    let data:StanfordSleepinessData  = new StanfordSleepinessData(this.scaleNum, this.dateval);
+    let setSleepKey =  "date" + this.sleepdate.toString();
+    await this.localStorage.set(setSleepKey, data);
+    this.localStorage.get(setSleepKey).then(data =>{
+      console.log(data);
+    })
+    
   }
 }
