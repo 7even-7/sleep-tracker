@@ -8,13 +8,17 @@
   <ion-item>
     <ion-button (click) = "backToHome()">Back</ion-button>
   </ion-item>
-
   <ion-item>
     <ion-button (click) = "ShowOverNightSleep()">Show Overnight Sleep Data</ion-button>
+    
+
   </ion-item>
+  <canvas #barCanvas style = "position: relative;height: 20vh;width:40vw"></canvas>
 
   <ion-item>
     <ion-button (click) = "ShowSleepiness()">Show Sleepiness Data</ion-button>
+    
   </ion-item>
+  <canvas #sleepDataCanvas style = "position: relative;height: 20vh;width:40vw"></canvas>
 
 </ion-content>
