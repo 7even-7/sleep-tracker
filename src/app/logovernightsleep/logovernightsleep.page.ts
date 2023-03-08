@@ -83,7 +83,8 @@ export class LogovernightsleepPage implements OnInit {
   private startime: any;
   private endtime: any;
   private sleeptime: number = 0;
-
+  private sleepHours: number = 0;
+  private logCount: number = 0;
   get date(): any {
     return this.startime;
   }
@@ -109,20 +110,35 @@ export class LogovernightsleepPage implements OnInit {
   async submit() {
     if (this.startime) {
       // Store start time in Ionic Storage
-      let timekey = "starttime" + this.sleeptime.toString();
-      await this.storage.set(timekey, this.startime);
+      //let timekey = "starttime" + this.sleeptime.toString();
+      let totalhours = "sleepHours" + this.sleepHours.toString();
+      let logDate = "loggedDate" + this.logCount.toString();
+      let startDate = new Date(this.startime);
+      let endDate = new Date(this.endtime);
+      let data:OvernightSleepData = new OvernightSleepData(startDate, endDate);
+      //console.log(startDate.getTime());
+      //console.log(endDate.getTime());
 
+      console.log(data.hours());
+      //console.log(data.summaryString());
+      //await this.storage.set(timekey, data);
+      await this.storage.set(logDate, data.loggedDate());
+      await this.storage.set(totalhours, data.hours());
+      
+      
       // Retrieve start time from Ionic Storage and log to console
-      const start = await this.storage.get(timekey);
-      console.log('Logged start time:', start);
+      //const start = await this.storage.get(timekey);
+      //console.log('Logged start time:', start);
       this.sleeptime += 1;
-
-      this.storage.length().then(result =>{
-        console.log(result);
-        });
+      this.sleepHours += 1;
+      this.logCount += 1;
+      // this.storage.length().then(result =>{
+      //   console.log(result);
+      //   });
     }
 
     // Reset start time
     this.startime = null;
+    this.endtime = null;
   }
 }
