@@ -3,7 +3,7 @@ import { SleepData } from './sleep-data';
 export class OvernightSleepData extends SleepData {
 	private sleepStart:Date;
 	private sleepEnd:Date;
-
+	logedDate:string;
 	constructor(sleepStart:Date, sleepEnd:Date) {
 		super();
 		this.sleepStart = sleepStart;
@@ -23,5 +23,18 @@ export class OvernightSleepData extends SleepData {
 
 	override dateString():string {
 		return "Night of " + this.sleepStart.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+	}
+	loggedDate():string{
+		return this.sleepStart.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+	}
+	hours():number{
+		var sleepStart_ms = this.sleepStart.getTime();
+		var sleepEnd_ms = this.sleepEnd.getTime();
+
+		// Calculate the difference in milliseconds
+		var difference_ms = sleepEnd_ms - sleepStart_ms;
+		return Math.floor(difference_ms / (1000*60*60)) + Number.parseFloat((Math.floor(difference_ms / (1000*60) % 60) * 0.1).toFixed(1));
+
 	}
 }

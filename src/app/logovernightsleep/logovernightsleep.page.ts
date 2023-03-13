@@ -66,6 +66,7 @@ import { SleepData } from '../data/sleep-data';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 import { Storage } from '@ionic/storage';
+import { Dialog } from '@capacitor/dialog';
 
 @Component({
   selector: 'app-logovernightsleep',

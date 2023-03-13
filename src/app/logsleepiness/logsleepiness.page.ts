@@ -15,8 +15,10 @@ export class LogsleepinessPage implements OnInit {
   private scaleNum: any;
   private dateval: any;
   private sleepdate: number = 0;
+  private sleepScale: number = 0;
+
   set setScale(value: any){
-    console.log({value});
+    //console.log({value});
     this.scaleNum = value;
   }
 
@@ -25,8 +27,10 @@ export class LogsleepinessPage implements OnInit {
   }
 
   set date(value: any){
-    console.log({value});
+    //console.log({value});
+
     this.dateval = value;
+
   }
 
   get date(): any{
@@ -42,13 +46,26 @@ export class LogsleepinessPage implements OnInit {
     .navigate(['home']);
   }
 
+  get datesFromStorage(): any{
+    return this.date;
+  }
+
+  
+
   async submit(){
-    let data:StanfordSleepinessData  = new StanfordSleepinessData(this.scaleNum, this.dateval);
+    //let data:StanfordSleepinessData  = new StanfordSleepinessData(this.scaleNum, this.dateval);
+    let sleepinesskey = "sleepiness" + this.sleepScale.toString();
     let setSleepKey =  "date" + this.sleepdate.toString();
-    await this.localStorage.set(setSleepKey, data);
-    this.localStorage.get(setSleepKey).then(data =>{
-      console.log(data);
-    })
-    
+    let setDay = new Date(this.dateval);
+    let loggedDay = setDay.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
+
+    await this.localStorage.set(setSleepKey, loggedDay);
+    await this.localStorage.set(sleepinesskey, this.scaleNum)
+     this.localStorage.get(sleepinesskey).then(data => {
+       console.log(data);
+     })
+     this.localStorage.get(setSleepKey).then(data => {
+       console.log(data);
+     })
   }
 }

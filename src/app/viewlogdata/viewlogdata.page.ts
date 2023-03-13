@@ -37,7 +37,7 @@ export class ViewlogdataPage implements OnInit {
       data: {
         labels: this.loggedDatesArray,//['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
         datasets: [{
-          label: 'Viewers in millions',
+          label: 'Sleep duration in hours and logged date',
           data: this.totalHoursArray,//[2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
           backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
           borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
@@ -54,12 +54,12 @@ export class ViewlogdataPage implements OnInit {
     this.sleepBarChart = new Chart(this.sleepDataCanvas.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
+        labels: this.sleepLoggedDateArray,
         datasets: [{
-          label: 'Viewers in millions',
-          data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
-          backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-          borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+          label: 'Sleepiness during the logged date',
+          data: this.sleepinessArray,
+          backgroundColor: 'rgb(94, 255, 251)', // array should have same number of elements as number of dataset
+          borderColor: 'rgb(94, 255, 251)',// array should have same number of elements as number of dataset
           borderWidth: 1
         }]
       },
@@ -92,19 +92,37 @@ export class ViewlogdataPage implements OnInit {
 
   async getSleepinessData(){
     this.localStorage.forEach((value, key, index ) =>{
-       if (key.includes("date")){
-        console.log(value.summaryString);
-       }
-      //console.log(key);
-      //console.log(value);
-      
-    });
+      if (key.includes("date")){
+         //console.log(value);
+         this.sleepLoggedDateArray.push(value);
+         
+      }
+      if (key.includes("sleepiness")){
+         //console.log(value);
+         this.sleepinessArray.push(value);
+       
+    }
+     //console.log(key);
+     //console.log(value);
+     
+   });
     // this.localStorage.get("starttime0").then(data => {
     //   console.log(data);
     // });
   }
   
   backToHome(){
+    if (this.barChart != null){
+      this.barChart.destroy();
+      this.state = false;
+    }
+    if (this.sleepBarChart != null){
+      this.sleepBarChart.destroy();
+      this.sleepState;
+    }
+    
+    
+
     this.router.navigate(['home']);
   }
 

@@ -4,7 +4,6 @@ import { IonicModule } from '@ionic/angular';
 import { Storage} from '@ionic/storage';
 import { IonicStorageModule } from '@ionic/storage-angular';
 
-
 const routes: Routes = [
   {
     path: 'home',
